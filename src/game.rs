@@ -94,7 +94,6 @@ impl Game {
             }
 
             if choice == "n" {
-                self.turn = PlayerType::Dealer;
                 return false;
             }
 
