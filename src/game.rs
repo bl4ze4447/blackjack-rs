@@ -36,10 +36,10 @@ impl Game {
         let mut dealer_score: i8 = 0;
 
         Self::handle_card_deal(&mut game_deck, &mut player_score, PlayerType::Player);
-        sleep(Duration::from_millis(500));
+        sleep(Duration::from_millis(1000));
 
         Self::handle_card_deal(&mut game_deck, &mut dealer_score, PlayerType::Dealer);
-        sleep(Duration::from_millis(500));
+        sleep(Duration::from_millis(1000));
 
         Self::handle_card_deal(&mut game_deck, &mut player_score, PlayerType::Player);
 
@@ -84,27 +84,16 @@ impl Game {
 
     pub fn next(&mut self) -> bool {
         if self.ended == true {
-            print!("The round ended, do you wish to play again? (y)es or (n)o: ");
-            let choice = Game::get_choice();
-
-            if choice == "y" {
-                println!("\nNew round started!");
-                self.reset();
-                return true;
-            }
-
-            if choice == "n" {
-                return false;
-            }
-
-            println!("Please type 'y' for Yes or 'n' for No!");
+            sleep(Duration::from_secs(3));
+            println!("New round started!");
+            self.reset();
             return true;
         }
 
         match self.turn {
             PlayerType::Player => {
                 // ask for input
-                print!("It's your turn, choose an option: (h)it or (s)tand: ");
+                print!("> It's your turn, choose an option: (h)it / (s)tand / (q)uit: ");
                 let choice = Self::get_choice();
 
                 if choice == "h" {
@@ -118,6 +107,11 @@ impl Game {
                     return true;
                 }
 
+                if choice == "q" {
+                    self.ended = true;
+                    return false;
+                }
+
                 println!("Please (h)it or (s)tand!");
                 true
             }
@@ -125,7 +119,7 @@ impl Game {
             PlayerType::Dealer => {
                 if self.used_hidden_card == false {
                     Self::handle_card_deal_by_card(&mut self.hidden_card, &mut self.dealer_score, PlayerType::Dealer);
-                    sleep(Duration::from_millis(500));
+                    sleep(Duration::from_millis(1000));
 
                     self.used_hidden_card = true;
                     return true;
@@ -136,7 +130,7 @@ impl Game {
                 }
 
                 Self::handle_card_deal(&mut self.game_deck, &mut self.dealer_score, PlayerType::Dealer);
-                sleep(Duration::from_millis(500));
+                sleep(Duration::from_millis(1000));
 
                 true
             }
@@ -167,10 +161,9 @@ impl Game {
 
             self.show_round_score();
             self.ended = true;
-            return true;
         }
 
-        false
+        self.ended
     }
 
     fn show_round_score(&self) {
@@ -196,11 +189,14 @@ impl Game {
     }
 
     fn announce_card_dealt(card: &Card, player: PlayerType, score: i8) {
-        let (message, hand_message) = match player {
-            PlayerType::Dealer => ("The dealer got", "Dealer's hand"),
-            PlayerType::Player => ("You've been dealt", "Your hand")
+        let (message, hand_message, border) = match player {
+            PlayerType::Dealer => ("The dealer got",    "Dealer's hand",    "--------------------------------"),
+            PlayerType::Player => ("You've been dealt", "Your hand",        "================================")
         };
 
-        println!("--------------------------------\n{message} {card}!\n{hand_message}: {score}\n--------------------------------\n");
+        println!("{border}");
+        println!("{message} {card}!");
+        println!("{hand_message}: {score}");
+        println!("{border}");
     }
 }
