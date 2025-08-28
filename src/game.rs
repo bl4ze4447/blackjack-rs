@@ -18,7 +18,7 @@ pub struct Game {
     used_hidden_card: bool,
     game_deck: GameDeck,
     turn: PlayerType,
-    pub ended: bool
+    ended: bool
 }
 
 const NUMBER_OF_DECKS: i8 = 6;
