@@ -202,7 +202,6 @@ impl Game {
             PlayerType::Player => ("You've been dealt", "Your hand")
         };
 
-        let card = card.to_string();
         println!("-------------------------------\n{message} {card}!\n{hand_message}: {score}\n-------------------------------\n");
     }
 }

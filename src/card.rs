@@ -1,4 +1,7 @@
 pub mod card_suit;
+
+use std::fmt;
+use std::fmt::Formatter;
 use crate::card::card_suit::CardSuit;
 
 pub struct Card {
@@ -39,8 +42,10 @@ impl Card {
             }
         }
     }
+}
 
-    pub fn to_string(&self) -> String {
-        format!("{} of {}", self.get_rank(), self.suit.to_string())
+impl fmt::Display for Card {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), fmt::Error> {
+        write!(f, "{} of {}", self.get_rank(), self.suit)
     }
 }
