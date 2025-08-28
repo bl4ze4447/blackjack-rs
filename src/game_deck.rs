@@ -14,10 +14,10 @@ impl GameDeck {
 
         for number in 2..=14 {
             for _ in 0..number_of_decks {
-                cards.push(Card::new(number, CardSuit::Heart));
-                cards.push(Card::new(number, CardSuit::Diamond));
-                cards.push(Card::new(number, CardSuit::Club));
-                cards.push(Card::new(number, CardSuit::Spade));
+                cards.push(Card::new(number, CardSuit::Hearts));
+                cards.push(Card::new(number, CardSuit::Diamonds));
+                cards.push(Card::new(number, CardSuit::Clubs));
+                cards.push(Card::new(number, CardSuit::Spades));
             }
         }
 

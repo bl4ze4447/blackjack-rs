@@ -202,6 +202,6 @@ impl Game {
             PlayerType::Player => ("You've been dealt", "Your hand")
         };
 
-        println!("-------------------------------\n{message} {card}!\n{hand_message}: {score}\n-------------------------------\n");
+        println!("--------------------------------\n{message} {card}!\n{hand_message}: {score}\n--------------------------------\n");
     }
 }
