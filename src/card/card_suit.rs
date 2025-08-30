@@ -24,7 +24,7 @@ mod tests {
     use crate::card::card_suit::CardSuit;
 
     #[test]
-    fn tests_to_string() {
+    fn test_to_string() {
         let h = CardSuit::Hearts;
         let d = CardSuit::Diamonds;
         let c = CardSuit::Clubs;

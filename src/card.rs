@@ -101,7 +101,7 @@ mod tests {
     }
 
     #[test]
-    fn tests_get_value() {
+    fn test_get_value() {
         for i in 2..=10 {
             let card: Card = Card::new(i, CardSuit::Diamonds);
             assert_eq!(card.value(0), i);

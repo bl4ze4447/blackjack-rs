@@ -34,3 +34,39 @@ impl GameDeck {
         self.cards.pop()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::game_deck::GameDeck;
+    const CARDS_PER_DECK: usize = 52;
+
+    #[test]
+    fn test_ctor() {
+        let gd = GameDeck::new(1);
+        assert_eq!(gd.cards.len(), CARDS_PER_DECK);
+
+        let gd = GameDeck::new(6);
+        assert_eq!(gd.cards.len(), CARDS_PER_DECK * 6);
+
+        let gd = GameDeck::new(0);
+        assert_eq!(gd.cards.len(), 0);
+
+        let gd = GameDeck::new(-20);
+        assert_eq!(gd.cards.len(), 0);
+    }
+
+    #[test]
+    fn test_deal_card() {
+        let mut gd = GameDeck::new(1);
+        let card = gd.deal_card();
+        assert!(card.is_some());
+
+        let mut gd = GameDeck::new(0);
+        let card = gd.deal_card();
+        assert_eq!(card.is_some(), false);
+
+        let mut gd = GameDeck::new(-20);
+        let card = gd.deal_card();
+        assert_eq!(card.is_some(), false);
+    }
+}

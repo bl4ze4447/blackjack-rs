@@ -331,3 +331,8 @@ impl Game {
         println!("{border}");
     }
 }
+
+#[cfg(test)]
+mod tests {
+
+}
