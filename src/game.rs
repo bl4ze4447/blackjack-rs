@@ -35,6 +35,8 @@ pub struct Game {
 
 const NUMBER_OF_DECKS: i8 = 6;
 const SHUFFLE_TIMES: i8 = 16;
+const MIN_BET_VALUE: i32 = 1;
+const MAX_BET_VALUE: i32 = 25_000;
 
 impl Game {
     fn get_bet() -> Result<i32, ParseIntError> {
@@ -48,11 +50,11 @@ impl Game {
             game_deck.shuffle();
         }
 
-        let bet: i32 = loop {
+        let bet = loop {
             println!("> Current balance: {balance} lei");
-            print!("> Place a bet (minimum 1 leu, maximul 25000 lei): ");
+            print!("> Place a bet (min {MIN_BET_VALUE} leu, max {MAX_BET_VALUE} lei): ");
             if let Ok(bet_value) = Self::get_bet() {
-                if bet_value < 1 {
+                if bet_value < MIN_BET_VALUE {
                     println!("Bet value is too small!");
                     continue;
                 }
@@ -62,7 +64,7 @@ impl Game {
                     continue;
                 }
 
-                if bet_value as i64 > 25000 {
+                if bet_value > MAX_BET_VALUE {
                     println!("Bet value exceeds max bet value!");
                     continue;
                 }
