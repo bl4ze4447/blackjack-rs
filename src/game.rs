@@ -280,13 +280,13 @@ impl Game {
 
             PlayerType::Player => {
                 if self.player_hand == HandType::Blackjack {
-                    self.balance += self.bet_value as i64 + (self.bet_value * 3 / 2) as i64;
-                    self.last_payout = self.bet_value + self.bet_value * 3 / 2;
+                    self.balance += (self.bet_value * 3 / 2) as i64;
+                    self.last_payout = self.bet_value * 3 / 2;
                     return;
                 }
 
-                self.balance += self.bet_value as i64 + (self.bet_value * 2) as i64;
-                self.last_payout = self.bet_value + self.bet_value * 2;
+                self.balance += (self.bet_value * 2) as i64;
+                self.last_payout = self.bet_value * 2;
             }
         }
     }
