@@ -18,3 +18,21 @@ impl fmt::Display for CardSuit {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::card::card_suit::CardSuit;
+
+    #[test]
+    fn tests_to_string() {
+        let h = CardSuit::Hearts;
+        let d = CardSuit::Diamonds;
+        let c = CardSuit::Clubs;
+        let s = CardSuit::Spades;
+
+        assert_eq!(h.to_string(), "Hearts");
+        assert_eq!(d.to_string(), "Diamonds");
+        assert_eq!(c.to_string(), "Clubs");
+        assert_eq!(s.to_string(), "Spades");
+    }
+}
